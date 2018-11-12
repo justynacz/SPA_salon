@@ -17,6 +17,7 @@ namespace SPA.Server.Models
         public int WorkerId { get; set; }
         public int? ClientId { get; set; }
         public bool? Done { get; set; }
+        public decimal Price { get; set; }
 
         public Client Client { get; set; }
         public Offer Offer { get; set; }

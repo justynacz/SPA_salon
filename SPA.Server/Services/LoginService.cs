@@ -36,7 +36,8 @@ namespace SPA.Server.Services
                 Password = password,
                 Active = true
             };
-            var loginCreated = _context.Login.Add(loginToAdd);
+
+            var loginCreated = await _context.Login.AddAsync(loginToAdd);
             await _context.SaveChangesAsync();
             return loginCreated.Entity;
         }

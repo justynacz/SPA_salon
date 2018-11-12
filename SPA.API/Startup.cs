@@ -26,6 +26,14 @@ namespace SPA.API
                 options.UseSqlServer(Configuration.GetConnectionString("database")));
 
             services.AddTransient<ILoginService, LoginService>();
+            services.AddTransient<IPersonService, PersonService>();
+            services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<IClientService, ClientService>();
+            services.AddTransient<IGlobalTermService, GlobalTermService>();
+            services.AddTransient<IOfferService, OfferService>();
+            services.AddTransient<ITermService, TermService>();
+            services.AddTransient<IWorkerService, WorkerService>();
+            services.AddTransient<IReviewService, ReviewService>();
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",

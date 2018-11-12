@@ -20,7 +20,7 @@ namespace SPA.API.Controllers
 
         // GET: api/Logins
         [HttpGet]
-        public IEnumerable<Login> GetLogin()
+        public IEnumerable<Login> GetLogins()
         {
             return _loginService.GetList();
         }
@@ -69,7 +69,7 @@ namespace SPA.API.Controllers
 
         // POST: api/Logins
         [HttpPost]
-        public async Task<IActionResult> PostLogin([FromBody] NewLoginModel login)
+        public async Task<IActionResult> CreateLogin([FromBody] NewLoginModel login)
         {
             if (!ModelState.IsValid)
             {

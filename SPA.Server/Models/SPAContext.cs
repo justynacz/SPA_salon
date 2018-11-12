@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace SPA.Server.Models
 {
@@ -23,15 +23,6 @@ namespace SPA.Server.Models
         public virtual DbSet<Term> Term { get; set; }
         public virtual DbSet<Worker> Worker { get; set; }
         public virtual DbSet<WorkerRole> WorkerRole { get; set; }
-
-//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//        {
-//            if (!optionsBuilder.IsConfigured)
-//            {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-//                optionsBuilder.UseSqlServer("Server=JCZUBA;Database=SPA;Trusted_Connection=True;");
-//            }
-//        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -143,6 +134,8 @@ namespace SPA.Server.Models
                 entity.Property(e => e.Date).HasColumnType("date");
 
                 entity.Property(e => e.Done).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.Price).HasColumnType("decimal(6, 2)");
 
                 entity.HasOne(d => d.Client)
                     .WithMany(p => p.Term)
