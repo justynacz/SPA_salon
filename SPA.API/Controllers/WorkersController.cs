@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using SPA.API.Models;
 using SPA.Server.Models;
 using SPA.Server.Services;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SPA.API.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class WorkersController : ControllerBase
@@ -22,15 +19,28 @@ namespace SPA.API.Controllers
             _workerService = workerService;
         }
 
-        // GET: api/Workers
+        /// <summary>
+        /// Gets list of workers.
+        /// </summary>
+        /// <response code="200">Returns the list of workers</response>
         [HttpGet]
+        [ProducesResponseType(200)]
         public IEnumerable<Worker> GetWorkers()
         {
             return _workerService.GetList();
         }
 
-        // GET: api/Workers/5
+        /// <summary>
+        /// Gets worker with a specific id.
+        /// </summary>
+        /// <param name="id">Worker id</param>
+        /// <response code="400">If the request is bad</response>
+        /// <response code="404">If the worker cannot be found</response>
+        /// <response code="200">Returns the worker</response>
         [HttpGet("{id}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(200)]
         public async Task<IActionResult> GetWorker([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -48,8 +58,16 @@ namespace SPA.API.Controllers
             return Ok(worker);
         }
 
-        // PUT: api/Workers/5
+        /// <summary>
+        /// Updates worker.
+        /// </summary>
+        /// <param name="id">Worker id</param>
+        /// <param name="worker">Worker entity</param>
+        /// <response code="400">If the request is bad or worker ids do not match</response>
+        /// <response code="204">Inform about success update</response>
         [HttpPut("{id}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
         public async Task<IActionResult> UpdateWorker([FromRoute] int id, [FromBody] Worker worker)
         {
             if (!ModelState.IsValid)
@@ -67,8 +85,15 @@ namespace SPA.API.Controllers
             return NoContent();
         }
 
-        // POST: api/Workers
+        /// <summary>
+        /// Creates worker.
+        /// </summary>
+        /// <param name="worker">New worker model</param>
+        /// <response code="400">If the request is bad</response>
+        /// <response code="201">Returns created worker</response>
         [HttpPost]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(201)]
         public async Task<IActionResult> CreateWorker([FromBody] NewWorkerModel worker)
         {
             if (!ModelState.IsValid)
@@ -81,8 +106,17 @@ namespace SPA.API.Controllers
             return CreatedAtAction("GetWorker", new { id = workerCreated.WorkerId }, worker);
         }
 
-        // DELETE: api/Workers/5
+        /// <summary>
+        /// Deletes worker with a specific id.
+        /// </summary>
+        /// <param name="id">Worker to delete id</param>
+        /// <response code="400">If the request is bad</response>
+        /// <response code="404">If the worker cannot be found</response>
+        /// <response code="200">Returns deleted worker</response>
         [HttpDelete("{id}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(200)]
         public async Task<IActionResult> DeleteWorker([FromRoute] int id)
         {
             if (!ModelState.IsValid)

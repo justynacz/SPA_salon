@@ -6,6 +6,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SPA.Server.Models;
 using SPA.Server.Services;
+using Swashbuckle.AspNetCore.Swagger;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace SPA.API
 {
@@ -24,7 +28,13 @@ namespace SPA.API
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<SPAContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("database")));
-
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "SPA API", Version = "v1" });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
             services.AddTransient<ILoginService, LoginService>();
             services.AddTransient<IPersonService, PersonService>();
             services.AddTransient<IRoleService, RoleService>();
@@ -55,7 +65,11 @@ namespace SPA.API
             {
                 app.UseHsts();
             }
-
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint(Configuration["AppSettings:VirtualDirectory"] + "/swagger/v1/swagger.json", "SPA SALOON API");
+            });
             app.UseHttpsRedirection();
             app.UseCors("CorsPolicy");
             app.UseMvc();

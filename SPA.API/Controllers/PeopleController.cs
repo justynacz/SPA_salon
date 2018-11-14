@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace SPA.API.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class PeopleController : ControllerBase
@@ -18,15 +19,28 @@ namespace SPA.API.Controllers
             _personService = personService;
         }
 
-        // GET: api/People
+        /// <summary>
+        /// Gets list of people.
+        /// </summary>
+        /// <response code="200">Returns the list of people</response>
         [HttpGet]
+        [ProducesResponseType(200)]
         public IEnumerable<Person> GetPeople()
         {
             return _personService.GetList();
         }
 
-        // GET: api/People/5
+        /// <summary>
+        /// Gets person with a specific id.
+        /// </summary>
+        /// <param name="id">Person id</param>
+        /// <response code="400">If the request is bad</response>
+        /// <response code="404">If the person cannot be found</response>
+        /// <response code="200">Returns the person</response>
         [HttpGet("{id}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(200)]
         public async Task<IActionResult> GetPerson([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -44,8 +58,16 @@ namespace SPA.API.Controllers
             return Ok(person);
         }
 
-        // PUT: api/People/5
+        /// <summary>
+        /// Updates person.
+        /// </summary>
+        /// <param name="id">Offer id</param>
+        /// <param name="person">Person entity</param>
+        /// <response code="400">If the request is bad or person ids do not match</response>
+        /// <response code="204">Inform about success update</response>
         [HttpPut("{id}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
         public async Task<IActionResult> UpdatePerson([FromRoute] int id, [FromBody] Person person)
         {
             if (!ModelState.IsValid)
@@ -63,8 +85,15 @@ namespace SPA.API.Controllers
             return NoContent();
         }
 
-        // POST: api/People
+        /// <summary>
+        /// Creates person.
+        /// </summary>
+        /// <param name="person">New person model</param>
+        /// <response code="400">If the request is bad</response>
+        /// <response code="201">Returns created person</response>
         [HttpPost]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(201)]
         public async Task<IActionResult> CreatePerson([FromBody] NewPersonModel person)
         {
             if (!ModelState.IsValid)
@@ -79,8 +108,17 @@ namespace SPA.API.Controllers
             return CreatedAtAction("GetPerson", new { id = personCreated.PersonId }, person);
         }
 
-        // DELETE: api/People/5
+        /// <summary>
+        /// Deletes person with a specific id.
+        /// </summary>
+        /// <param name="id">Person to delete id</param>
+        /// <response code="400">If the request is bad</response>
+        /// <response code="404">If the person cannot be found</response>
+        /// <response code="200">Returns deleted person</response>
         [HttpDelete("{id}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(200)]
         public async Task<IActionResult> DeletePerson([FromRoute] int id)
         {
             if (!ModelState.IsValid)

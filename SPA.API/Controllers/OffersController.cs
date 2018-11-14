@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace SPA.API.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class OffersController : ControllerBase
@@ -18,15 +19,28 @@ namespace SPA.API.Controllers
             _offerService = offerService;
         }
 
-        // GET: api/Offers
+        /// <summary>
+        /// Gets list of offers.
+        /// </summary>
+        /// <response code="200">Returns the list of offers</response>
         [HttpGet]
+        [ProducesResponseType(200)]
         public IEnumerable<Offer> GetOffers()
         {
             return _offerService.GetList();
         }
 
-        // GET: api/Offers/5
+        /// <summary>
+        /// Gets offer with a specific id.
+        /// </summary>
+        /// <param name="id">Offer id</param>
+        /// <response code="400">If the request is bad</response>
+        /// <response code="404">If the offer cannot be found</response>
+        /// <response code="200">Returns the offer</response>
         [HttpGet("{id}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(200)]
         public async Task<IActionResult> GetOffer([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -44,8 +58,16 @@ namespace SPA.API.Controllers
             return Ok(offer);
         }
 
-        // PUT: api/Offers/5
+        /// <summary>
+        /// Updates offer.
+        /// </summary>
+        /// <param name="id">Offer id</param>
+        /// <param name="offer">Offer entity</param>
+        /// <response code="400">If the request is bad or offer ids do not match</response>
+        /// <response code="204">Inform about success update</response>
         [HttpPut("{id}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
         public async Task<IActionResult> UpdateOffer([FromRoute] int id, [FromBody] Offer offer)
         {
             if (!ModelState.IsValid)
@@ -63,8 +85,15 @@ namespace SPA.API.Controllers
             return NoContent();
         }
 
-        // POST: api/Offers
+        /// <summary>
+        /// Creates offer.
+        /// </summary>
+        /// <param name="offer">New offer model</param>
+        /// <response code="400">If the request is bad</response>
+        /// <response code="201">Returns created offer</response>
         [HttpPost]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(201)]
         public async Task<IActionResult> CreateOffer([FromBody] NewOfferModel offer)
         {
             if (!ModelState.IsValid)
@@ -77,8 +106,17 @@ namespace SPA.API.Controllers
             return CreatedAtAction("GetOffer", new { id = offerCreated.OfferId }, offer);
         }
 
-        // DELETE: api/Offers/5
+        /// <summary>
+        /// Deletes offer with a specific id.
+        /// </summary>
+        /// <param name="id">Offer to delete id</param>
+        /// <response code="400">If the request is bad</response>
+        /// <response code="404">If the offer cannot be found</response>
+        /// <response code="200">Returns deleted offer</response>
         [HttpDelete("{id}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(200)]
         public async Task<IActionResult> DeleteOffer([FromRoute] int id)
         {
             if (!ModelState.IsValid)

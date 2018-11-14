@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace SPA.API.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class GlobalTermsController : ControllerBase
@@ -18,15 +19,28 @@ namespace SPA.API.Controllers
             _globalTermService = globalTermService;
         }
 
-        // GET: api/GlobalTerms
+        /// <summary>
+        /// Gets list of global terms.
+        /// </summary> 
+        /// <response code="200">Returns the list of global terms</response>
         [HttpGet]
+        [ProducesResponseType(200)]
         public IEnumerable<GlobalTerm> GetGlobalTerms()
         {
             return _globalTermService.GetList();
         }
 
-        // GET: api/GlobalTerms/5
+        /// <summary>
+        /// Gets global term with a specific id.
+        /// </summary>
+        /// <param name="id">Global term id</param>  
+        /// <response code="400">If the request is bad</response>
+        /// <response code="404">If the global term cannot be found</response>
+        /// <response code="200">Returns the global term</response>
         [HttpGet("{id}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(200)]
         public async Task<IActionResult> GetGlobalTerm([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -44,8 +58,16 @@ namespace SPA.API.Controllers
             return Ok(globalTerm);
         }
 
-        // PUT: api/GlobalTerms/5
+        /// <summary>
+        /// Updates global term.
+        /// </summary>
+        /// <param name="id">Global term id</param>  
+        /// <param name="globalTerm">Global term entity</param>
+        /// <response code="400">If the request is bad or global term ids do not match</response>
+        /// <response code="204">Inform about success update</response>
         [HttpPut("{id}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
         public async Task<IActionResult> UpdateGlobalTerm([FromRoute] int id, [FromBody] GlobalTerm globalTerm)
         {
             if (!ModelState.IsValid)
@@ -63,8 +85,15 @@ namespace SPA.API.Controllers
             return NoContent();
         }
 
-        // POST: api/GlobalTerms
+        /// <summary>
+        /// Creates global term
+        /// </summary>
+        /// <param name="globalTerm">New global term model</param>  
+        /// <response code="400">If the request is bad</response>
+        /// <response code="201">Returns created global term</response>
         [HttpPost]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(201)]
         public async Task<IActionResult> CreateGlobalTerm([FromBody] NewGlobalTermModel globalTerm)
         {
             if (!ModelState.IsValid)
@@ -77,8 +106,17 @@ namespace SPA.API.Controllers
             return CreatedAtAction("GetGlobalTerm", new { id = globalTermCreated.GlobalTermId }, globalTerm);
         }
 
-        // DELETE: api/GlobalTerms/5
+        /// <summary>
+        /// Deletes global term with a specific id.
+        /// </summary>
+        /// <param name="id">Global term to delete id</param>  
+        /// <response code="400">If the request is bad</response>
+        /// <response code="404">If the global term cannot be found</response>
+        /// <response code="200">Returns deleted global term</response>
         [HttpDelete("{id}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(200)]
         public async Task<IActionResult> DeleteGlobalTerm([FromRoute] int id)
         {
             if (!ModelState.IsValid)
