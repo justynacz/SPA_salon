@@ -24,4 +24,14 @@ export class OffersComponent implements OnInit {
   openNewOfferModal() {
     this.bsModalRef = this.modalService.show(OfferNewComponent);
   }
+
+  async editOffer(id: number){
+    let offerToEdit: Offer;
+    offerToEdit = await this.offerService.GetOffer(id).toPromise();
+    const initialState = {
+      offerToEdit:offerToEdit,
+      editedOffer: true
+    };
+    this.bsModalRef = this.modalService.show(OfferNewComponent, {initialState});
+  }
 }

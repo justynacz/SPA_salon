@@ -63,6 +63,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [OfferNewComponent]
+  entryComponents: [
+    OfferNewComponent,
+    RoleNewComponent]
 })
 export class AppModule { }

@@ -1,3 +1,22 @@
-<p>
-  role-new works!
-</p>
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{ 'APP.ROLE.ADDING_NEW' | translate }}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="newRoleForm">
+    <div class="form-group">
+      <label for="name">{{ 'APP.ROLE.NAME' | translate }}</label>
+      <input type="text" class="form-control" id="name" aria-describedby="emailHelp" formControlName="name">
+    </div>           
+    <div class="form-group">
+      <label for="description">{{ 'APP.ROLE.DESCRIPTION' | translate }}</label>
+      <textarea row="4" class="form-control" id="description" formControlName="description"></textarea>
+    </div>       
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" (click)="saveRole()" [disabled]="!newRoleForm.valid">{{ 'APP.COMMON.SAVE' | translate }}</button>
+  <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">{{ 'APP.COMMON.CLOSE' | translate }}</button>
+</div>

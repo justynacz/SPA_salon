@@ -8,6 +8,7 @@
             "CLOSE": "Close",
             "OFFER": "Offer",
             "GLOBAL_TERMS": "Global terms",
+            "ROLES": "Roles",
             "LOGIN": "Login"
         },
         "OFFER":{
@@ -16,6 +17,12 @@
             "NAME": "Offer",
             "DESCRIPTION": "Description",
             "ROLE": "Worker role"
+        },
+        "ROLE":{
+            "CREATE": "New role",
+            "ADDING_NEW": "Adding new role",
+            "NAME": "Role",
+            "DESCRIPTION": "Description of permissions"
         }
     }
 }

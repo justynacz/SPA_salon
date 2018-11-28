@@ -23,6 +23,6 @@
   </form>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-primary" (click)="saveOffer()">{{ 'APP.COMMON.SAVE' | translate }}</button>
+  <button class="btn btn-primary" (click)="saveOffer()" [disabled]="!newOfferForm.valid">{{ 'APP.COMMON.SAVE' | translate }}</button>
   <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">{{ 'APP.COMMON.CLOSE' | translate }}</button>
 </div>

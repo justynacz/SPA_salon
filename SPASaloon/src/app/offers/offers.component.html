@@ -4,7 +4,8 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">{{ 'APP.OFFER.NAME' | translate }}</th>
-      <th scope="col">{{ 'APP.OFFER.DESCRIPTION' | translate }}</th>
+      <th scope="col">{{ 'APP.OFFER.DESCRIPTION' | translate }}</th>   
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -12,6 +13,7 @@
       <th scope="row">{{offer.offerId}}</th>
       <td>{{offer.name}}</td>
       <td>{{offer.description}}</td>
+      <td><a (click)="editOffer(offer.offerId)"><i class="fas fa-edit"></i></a></td>
     </tr>      
   </tbody>
 </table>

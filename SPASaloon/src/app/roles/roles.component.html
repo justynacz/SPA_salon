@@ -1,3 +1,19 @@
-<p>
-  roles works!
-</p>
+<button class="btn btn-primary" (click)="openNewRoleModal()">{{ 'APP.ROLE.CREATE' | translate }}</button>
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">{{ 'APP.ROLE.NAME' | translate }}</th>
+      <th scope="col">{{ 'APP.ROLE.DESCRIPTION' | translate }}</th>      
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let role of roleList">
+      <th scope="row">{{role.roleId}}</th>
+      <td>{{role.name}}</td>
+      <td>{{role.description}}</td>      
+      <td><a (click)="editRole(role.roleId)"><i class="fas fa-edit"></i></a></td>
+    </tr>      
+  </tbody>
+</table>

@@ -8,6 +8,7 @@
             "CLOSE": "Zamknij",
             "OFFER": "Oferta",
             "GLOBAL_TERMS": "Terminy ogólne",
+            "ROLES": "Role",
             "LOGIN": "Logowanie"
         },
         "OFFER":{
@@ -16,7 +17,12 @@
             "NAME": "Nazwa zabiegu",
             "DESCRIPTION": "Opis zabiegu",
             "ROLE": "Rola osoby, która może wykonywać zabieg"
+        },
+        "ROLE":{
+            "CREATE": "Nowa rola",
+            "ADDING_NEW": "Dodawanie nowej roli",
+            "NAME": "Nazwa roli",
+            "DESCRIPTION": "Opis uprawnień"
         }
-
     }
 }
