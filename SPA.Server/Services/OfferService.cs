@@ -23,6 +23,7 @@ namespace SPA.Server.Services
             };
 
             var offerCreated = await _context.Offer.AddAsync(offerToAdd);
+            await _context.SaveChangesAsync();
             return offerCreated.Entity;
         }
 
