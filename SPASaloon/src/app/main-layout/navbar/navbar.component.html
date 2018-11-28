@@ -12,18 +12,25 @@
           <a class="nav-link" href="global-terms">{{ 'APP.COMMON.GLOBAL_TERMS' | translate }}</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="roles">{{ 'APP.COMMON.ROLES' | translate }}</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="login">{{ 'APP.COMMON.LOGIN' | translate }}</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{ 'APP.COMMON.LANGUAGE' | translate }}
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" (click)="changeLanguage('pl')">pl</a>
-            <a class="dropdown-item" (click)="changeLanguage('en')">eng</a>
-          </div>
-        </li>
+        </li>        
       </ul>
+      
+        <ul class="navbar-nav my-2 my-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{ 'APP.COMMON.LANGUAGE' | translate }}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" (click)="changeLanguage('pl')">pl</a>
+              <a class="dropdown-item" (click)="changeLanguage('en')">eng</a>
+            </div>
+          </li>
+        </ul>
+
     </div>
   </nav>
  
