@@ -1,0 +1,22 @@
+{
+    "APP":{
+        "APP_TITLE": "Salon SPA",
+        "FOOTER": "Przedmiot: Aplikacje Internetowe Temat: Salon SPA Wykonawca: Justyna Czuba",
+        "COMMON":{
+            "LANGUAGE": "Język",
+            "SAVE": "Zapisz",
+            "CLOSE": "Zamknij",
+            "OFFER": "Oferta",
+            "GLOBAL_TERMS": "Terminy ogólne",
+            "LOGIN": "Logowanie"
+        },
+        "OFFER":{
+            "CREATE": "Nowa oferta",
+            "ADDING_NEW": "Dodawanie nowej oferty",
+            "NAME": "Nazwa zabiegu",
+            "DESCRIPTION": "Opis zabiegu",
+            "ROLE": "Rola osoby, która może wykonywać zabieg"
+        }
+
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "APP":{
+        "APP_TITLE": "Beauty Saloon",
+        "FOOTER": "Unit: Web Application Subject: Beauty Saloon Author: Justyna Czuba",
+        "COMMON":{
+            "LANGUAGE": "Language",
+            "SAVE": "Save",
+            "CLOSE": "Close",
+            "OFFER": "Offer",
+            "GLOBAL_TERMS": "Global terms",
+            "LOGIN": "Login"
+        },
+        "OFFER":{
+            "CREATE": "New offer",
+            "ADDING_NEW": "Adding new offer",
+            "NAME": "Offer",
+            "DESCRIPTION": "Description",
+            "ROLE": "Worker role"
+        }
+    }
+}

@@ -1,19 +1,29 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Salon SPA</a>
+    <a class="navbar-brand" href="#">{{ 'APP.APP_TITLE' | translate }}</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="offers">Oferta</a>
+          <a class="nav-link" href="offers">{{ 'APP.COMMON.OFFER' | translate }}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="global-terms">Terminy ogólne</a>
+          <a class="nav-link" href="global-terms">{{ 'APP.COMMON.GLOBAL_TERMS' | translate }}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="login">Logowanie</a>
+          <a class="nav-link" href="login">{{ 'APP.COMMON.LOGIN' | translate }}</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ 'APP.COMMON.LANGUAGE' | translate }}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" (click)="changeLanguage('pl')">pl</a>
+            <a class="dropdown-item" (click)="changeLanguage('en')">eng</a>
+          </div>
         </li>
       </ul>
     </div>
   </nav>
+ 
