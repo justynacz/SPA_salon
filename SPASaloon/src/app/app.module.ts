@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+ 
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppBootstrapModule } from './app-bootstrap/app-bootstrap.module';
 import { AppComponent } from './app.component';
@@ -39,6 +42,8 @@ import { RoleNewComponent } from './roles/role-new/role-new.component';
   imports: [
     BrowserModule,
     AppBootstrapModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot() ,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule

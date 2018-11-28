@@ -3,6 +3,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { RolesService, OffersService } from 'src/app/api/services';
 import { Role, NewOfferModel } from 'src/app/api/models';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class OfferNewComponent implements OnInit {
     public bsModalRef: BsModalRef,
     private roleService: RolesService,
     private offerService: OffersService,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private toastr: ToastrService) {
       this.createForm();
     }
  
@@ -31,8 +33,15 @@ export class OfferNewComponent implements OnInit {
     newOffer = this.newOfferForm.value;
     console.log('sub');
     this.offerService.CreateOffer(newOffer).toPromise()
-    .then( () => console.log("Dodano ofertę"))
-    .catch( () => console.log("Dodawanie oferty nie powiodło się"));
+    .then( () =>{ 
+      console.log("Dodano ofertę");
+      this.toastr.success('Dodano nową ofertę');
+      this.bsModalRef.hide();
+    })
+    .catch( () => {
+      console.log("Dodawanie oferty nie powiodło się");
+      this.toastr.error('Nie udało się dodać oferty');
+    });
   }
   
   private createForm(){

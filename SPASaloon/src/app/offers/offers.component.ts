@@ -22,16 +22,6 @@ export class OffersComponent implements OnInit {
   }
 
   openNewOfferModal() {
-    // const initialState = {
-    //   list: [
-    //     'Open a modal with component',
-    //     'Pass your data',
-    //     'Do something else',
-    //     '...'
-    //   ],
-    //   title: 'Modal with component'
-    // };
     this.bsModalRef = this.modalService.show(OfferNewComponent);
-    //this.bsModalRef.content.closeBtnName = 'Close';
   }
 }
