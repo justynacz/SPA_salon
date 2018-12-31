@@ -23,6 +23,12 @@
             "ADDING_NEW": "Adding new role",
             "NAME": "Role",
             "DESCRIPTION": "Description of permissions"
+        },
+        "AUTHENTICATION":{
+            "USERNAME": "Username",
+            "PASSWORD": "Password",
+            "LOGIN": "LOG ON",
+            "REGISTER": "Register"
         }
     }
 }

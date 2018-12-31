@@ -1,32 +1,28 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
+import { LoginsService } from '../api/services';
+import { AuthenticateModel } from '../api/models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
-  constructor(http: HttpClient) { }
-  GetRequestTokenFromUSOS(): Observable<any> {
-    let __params = this.newParams();
-    let __headers = new HttpHeaders();
-    let __body: any = null;
-    let req = new HttpRequest<any>(
-      'POST',
-      this.rootUrl + `/api/Clients`,
-      __body,
+  constructor(
+    private loginService: LoginsService) { }
+  login(username: string, password: string) {
+    let authenticationParam : AuthenticateModel;
+    authenticationParam = { username: username, password: password};
+    return this.loginService.Authenticate(authenticationParam).toPromise()
+    .then(result => 
       {
-        headers: __headers,
-        params: __params,
-        responseType: 'json'
+        if (result)  
+          localStorage.setItem('currentUser', JSON.stringify(result));
+         
+        return result;
       });
+  }
 
-    return this.http.request<any>(req).pipe(
-      __filter(_r => _r instanceof HttpResponse),
-      __map((_r) => {
-        return _r as StrictHttpResponse<Array<Client>>;
-      })
-    );
+  logout() {
+    localStorage.removeItem('currentUser');
   }
 }

@@ -10,6 +10,7 @@ export { Role } from './models/role';
 export { NewClientModel } from './models/new-client-model';
 export { GlobalTerm } from './models/global-term';
 export { NewGlobalTermModel } from './models/new-global-term-model';
+export { AuthenticateModel } from './models/authenticate-model';
 export { NewLoginModel } from './models/new-login-model';
 export { ChangePasswordModel } from './models/change-password-model';
 export { NewOfferModel } from './models/new-offer-model';

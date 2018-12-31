@@ -7,6 +7,7 @@ import { StrictHttpResponse } from '../strict-http-response';
 import { Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
+import { AuthenticateModel } from '../models/authenticate-model';
 import { Login } from '../models/login';
 import { NewLoginModel } from '../models/new-login-model';
 import { ChangePasswordModel } from '../models/change-password-model';
@@ -19,6 +20,40 @@ class LoginsService extends BaseService {
     http: HttpClient
   ) {
     super(config, http);
+  }
+
+  /**
+   * @param authenticateModel undefined
+   */
+  AuthenticateResponse(authenticateModel?: AuthenticateModel): Observable<StrictHttpResponse<null>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = authenticateModel;
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/api/Logins/authenticate`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as StrictHttpResponse<null>;
+      })
+    );
+  }
+  /**
+   * @param authenticateModel undefined
+   */
+  Authenticate(authenticateModel?: AuthenticateModel): Observable<null> {
+    return this.AuthenticateResponse(authenticateModel).pipe(
+      __map(_r => _r.body as null)
+    );
   }
 
   /**

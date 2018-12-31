@@ -23,6 +23,12 @@
             "ADDING_NEW": "Dodawanie nowej roli",
             "NAME": "Nazwa roli",
             "DESCRIPTION": "Opis uprawnień"
+        },
+        "AUTHENTICATION":{
+            "USERNAME": "Użytkownik",
+            "PASSWORD": "Hasło",
+            "LOGIN": "Zaloguj",
+            "REGISTER": "Zarejestruj"
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SPA.Server.Models;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SPA.Server.Services
@@ -26,6 +27,22 @@ namespace SPA.Server.Services
             {
                 throw;
             }
+        }
+
+        public Login Authenticate(string username, string password)
+        {
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+                return null;
+
+            var user = _context.Login.SingleOrDefault(x => x.Username == username);
+            
+            if (user == null)
+                return null;
+            
+            if (string.Compare(password, user.Password)!=0)
+                return null;
+            
+            return user;
         }
 
         public async Task<Login> CreateLoginAsync(string username, string password)

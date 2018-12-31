@@ -1,8 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using SPA.API.Models;
 using SPA.Server.Models;
 using SPA.Server.Services;
+using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace SPA.API.Controllers
@@ -17,6 +23,43 @@ namespace SPA.API.Controllers
         public LoginsController(ILoginService loginService)
         {
             _loginService = loginService;
+        }
+
+        /// <summary>
+        /// Authenticate user
+        /// </summary>
+        /// <response code="400">If the request is bad</response>
+        /// <response code="200">Returns the login</response>
+        [AllowAnonymous]
+        [HttpPost("authenticate")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(200)]
+        public IActionResult Authenticate([FromBody]AuthenticateModel authenticateModel)
+        {
+            var login = _loginService.Authenticate(authenticateModel.Username, authenticateModel.Password);
+
+            if (login == null)
+                return BadRequest(new { message = "Username or password is incorrect" });
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes("Some secret key for authentication");
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name,login.LoginId.ToString())
+                }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var tokenString = tokenHandler.WriteToken(token);
+            return Ok(new
+            {
+                Id = login.LoginId,
+                Username = login.Username,
+                Token = tokenString
+            });
         }
 
         /// <summary>
@@ -95,6 +138,7 @@ namespace SPA.API.Controllers
         /// <param name="login">New login model</param>
         /// <response code="400">If the request is bad</response>
         /// <response code="201">Returns created login</response>
+        [AllowAnonymous]
         [HttpPost]
         [ProducesResponseType(400)]
         [ProducesResponseType(201)]
